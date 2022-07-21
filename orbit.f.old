@@ -1,0 +1,72 @@
+        subroutine vecadd(v1, v2, n)
+            DOUBLE PRECISION, dimension(*) :: v1
+            DOUBLE PRECISION, dimension(*) :: v2
+            
+            do i = 1, n
+                v1(i) = v2(i) + v1(i)
+            end do
+        end subroutine
+        
+        subroutine vecsub(v1, v2, n)
+            DOUBLE PRECISION, dimension(*) :: v1
+            DOUBLE PRECISION, dimension(*) :: v2
+            
+            do i = 1, n
+                v1(i) = v1(i) - v2(i)
+            end do
+        end subroutine
+        
+        subroutine vecmul(v1, k, n)
+            DOUBLE PRECISION, dimension(*) :: v1
+            DOUBLE PRECISION               :: k
+            
+            do i = 1, n
+                v1(i) = v1(i) * k
+            end do
+        end subroutine
+        
+        subroutine vecdiv(v1, k, n)
+            DOUBLE PRECISION, dimension(*) :: v1
+            DOUBLE PRECISION               :: k
+            
+            do i = 1, n
+                v1(i) = v1(i) / k
+            end do
+        end subroutine
+        
+        
+        
+        
+        !subroutine dist(v1, v2, n)
+        !    DOUBLE PRECISION, dimension(*) :: v1
+        !    DOUBLE PRECISION, dimension(*) :: v2
+        !    DOUBLE PRECISION,              :: sum
+        !    
+        !    do i = 1, n
+        !        sum = sum + (v2(i)-v1(i))**2
+        !    end do
+        !end subroutine
+        
+        program main
+            implicit none
+            external vecadd
+            external vecsub
+            external vecmul
+            external vecdiv
+            integer :: D = 3
+            DOUBLE PRECISION, dimension(3) :: v1 = (/ 1, 2, 3 /)
+            DOUBLE PRECISION, dimension(3) :: v2 = (/ 4, 5, 6 /)
+            DOUBLE PRECISION               :: coef = 2
+            call vecadd(v1,v2,D)
+            print *, v1
+            call vecdiv(v1,coef,D)
+            print *, v1
+            call vecmul(v1,coef,D)
+            print *, v1
+            call vecsub(v1,v2,D)
+            print *, v1
+            v1 = v1**2
+            print *, v1
+            
+        end program main
+

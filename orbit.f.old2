@@ -1,0 +1,86 @@
+        function magn(v1, n)
+            DOUBLE PRECISION, dimension(*) :: v1
+            DOUBLE PRECISION               :: magn
+            
+            do i = 1, n
+                magn = magn + (v1(i))**2
+            end do
+            magn = SQRT(magn)
+        end function
+        
+        program main
+            implicit none
+            type body
+                character       , dimension(20):: name
+                DOUBLE PRECISION               :: mass
+                DOUBLE PRECISION, dimension(3) :: position
+                DOUBLE PRECISION, dimension(3) :: velocity
+                DOUBLE PRECISION, dimension(3) :: acceleration
+            end type
+            DOUBLE PRECISION               :: magn
+            integer :: D = 3
+            DOUBLE PRECISION :: time_increment = 1000 ! 1000 second increment
+            DOUBLE PRECISION :: time           = 0
+            integer :: nsteps = 1000 ! 1000 steps
+            
+            type (body), dimension(2) :: bodies
+            
+            !bodies(1)%name         = "sun"
+            !bodies(1)%mass         = 1.989D30
+            !bodies(1)%position     = (/0, 0, 0/)
+            !bodies(1)%velocity     = (/0, 0, 0/)
+            !bodies(1)%acceleration = (/0, 0, 0/)
+            
+            !bodies(1)%mass = 1.989D30
+            !this doesn't work because it's too long
+            !bodies(1) = body("sun", 1.989D30, (/0, 0, 0/), (/0, 0, 0/), (/0, 0, 0/))
+            
+            bodies(1) = body(
+     >          "sun",         ! name
+     >          1.989D30,      ! mass
+     >          (/ 0D0, 0D0, 0D0 /), ! position
+     >          (/ 0D0, 0D0, 0D0 /), ! velocity
+     >          (/ 0D0, 0D0, 0D0 /)  ! acceleration
+     >      )
+            
+            bodies(2) = body(
+     >          "earth",
+     >          5.972D24,
+     >          (/ 1.50D11, 0D0,  0D0 /),
+     >          (/ 0D0,     30D3, 0D0 /),
+     >          (/ 0D0,     0D0,  0D0 /)
+     >      )
+            
+            !
+            print *, bodies(1)%acceleration
+            print *, bodies(2)%position
+            print *, bodies(2)%name
+            
+            !type (body) :: sun
+            !sun%position     = (/ 0, 0, 0 /)
+            !sun%velocity     = (/ 0, 0, 0 /)
+            !sun%acceleration = (/ 0, 0, 0 /)
+            !sun%mass         = 1.989D30
+            !print *, sun%mass
+            !print *, magn(sun%velocity,D)
+            
+            
+            
+            
+            
+            
+            
+            
+            !type fruit
+            !    real      :: diameter  ! in mm
+            !    real      :: length    ! in mm
+            !    character :: colour
+            !end type
+            !
+            !type (fruit) :: apple, banana
+            !apple = fruit(50, 45, "red")
+            !banana%diameter = 40
+            !banana%length   = 200
+            !banana%colour   = "yellow"
+            !print *, banana%length
+        end program main
